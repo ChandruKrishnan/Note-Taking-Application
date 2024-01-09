@@ -19,7 +19,7 @@ const NoteList: React.FC = () => {
 
   return (
     <div>
-      <h2>Notes</h2>
+      <h2>List of Notes</h2>
       <ul>
         {notes.map((note: any) => (
           <li key={note.id}>{note.title}</li>
