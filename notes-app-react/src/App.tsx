@@ -7,10 +7,6 @@ const App: React.FC = () => {
   return (
     <div>
       <NoteList />
-      <hr />
-      <NoteDetail noteId={1} />
-      <hr />
-      <NoteForm />
     </div>
   );
 };
