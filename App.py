@@ -1,11 +1,13 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postres:notesApp?@localhost/notesdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:notesApp?@localhost/notesdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
