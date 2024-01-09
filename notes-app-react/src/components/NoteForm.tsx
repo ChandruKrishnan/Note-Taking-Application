@@ -9,12 +9,12 @@ const NoteForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/api/notes', { title, content });
+      await axios.post('http://localhost:5000/api/notes', { title, content });
       // Optionally, you can reset the form or update the notes list
       setTitle('');
       setContent('');
     } catch (error) {
-      console.error('Error creating note:', error);
+      console.error('Error creating note TEST:', error);
     }
   };
 

@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3001"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:notesApp?@localhost/notesdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -22,6 +22,15 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
+
+@app.before_request
+def handle_options_request():
+    if request.method == "OPTIONS" and request.path.startswith("/api/"):
+        response = make_response()
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        response.headers["Access-Control-Max-Age"] = "600"  # 10 minutes
+        return response
 
 @app.route('/api/notes', methods=['GET'])
 def get_notes():
