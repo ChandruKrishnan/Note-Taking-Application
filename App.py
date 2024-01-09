@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-class user(db.Model):
+class User(db.Model):
     id = db.Column(db.String(50), unique = True, nullable = False)
 
     def __repr__(self):
