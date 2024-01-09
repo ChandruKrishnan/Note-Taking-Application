@@ -10,10 +10,10 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class User(db.Model):
-    id = db.Column(db.String(50), unique = True, nullable = False)
+    id = db.Column(db.String(50), primary_key=True, unique = True, nullable = False)
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.id}>'
 
 
 class Note(db.Model):
